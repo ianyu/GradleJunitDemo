@@ -1,0 +1,52 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.1'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.tpisoftware'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' //Spring Boot 2.2 預設為 JUnit 5
+}
+
+/*
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web' // Spring Boot Web
+    testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'junit', module: 'junit' // 排除JUnit 4的依賴
+    }
+    
+    // JUnit 5 依賴設定
+    testImplementation 'org.junit.jupiter:junit-jupiter-api' // JUnit 5 API 介面
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine' // JUnit 5 測試框架的實作
+}
+ */
+
+
+tasks.named('test') {
+	useJUnitPlatform() //指定使用 JUnit 5 進行測試
+}
+
+//GRADLE CLI >> gradle clean test [--info]
+/*
+test {
+    useJUnitPlatform {
+    	includeTags 'fast'
+        excludeTags 'slow'
+    }
+}
+ */
